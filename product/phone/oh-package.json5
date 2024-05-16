@@ -1,0 +1,13 @@
+{
+  "name": "phone",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@meihui/home": "file:../../feature/Home",
+    "@meihui/Category": "file:../../feature/Category",
+    "@meihui/common": "file:../../common"
+  }
+}

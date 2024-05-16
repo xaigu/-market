@@ -1,0 +1,56 @@
+{
+  "app": {
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compileSdkVersion": "4.1.0(11)",
+        "compatibleSdkVersion": "4.1.0(11)",
+        "runtimeOS": "HarmonyOS",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "phone",
+      "srcPath": "./product/phone",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Common",
+      "srcPath": "./Common",
+    },
+    {
+      "name": "Category",
+      "srcPath": "./feature/Category"
+    },
+    {
+      "name": "My",
+      "srcPath": "./feature/My"
+    },
+    {
+      "name": "ShopCart",
+      "srcPath": "./feature/ShopCart"
+    },
+    {
+      "name": "Home",
+      "srcPath": "./feature/Home"
+    }
+  ]
+}
