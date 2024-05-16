@@ -44,3 +44,12 @@ export interface NewGoods {
   picture: string;
   price: string;
 }
+//推荐列表区域
+export interface RecommendList {
+  id: string;
+  name: string;
+  payCount: number;
+  picture: string;
+  price: string;
+
+}
