@@ -1,9 +1,18 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import { Log } from '@abner/log';
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    Log.init({
+      tag: "meihui",
+      domain: 0x0000,
+      close: false,
+      isHilog: true,
+      showLogLocation: true,
+      logSize: 800
+    })
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
   }
 

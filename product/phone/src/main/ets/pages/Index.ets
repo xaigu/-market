@@ -1,3 +1,4 @@
+import { Log } from '@abner/log';
 import { MainPage } from '@meihui/home';
 // import { CategoryPage}from  '@meihui/Category'
 // axios基础测试
@@ -16,7 +17,7 @@ struct Index {
         Button('发送请求')
           .onClick(async ()=>{
            const res=await getBannerAPI()
-            console.log(JSON.stringify(res.data.result))
+          Log.info(JSON.stringify(res.data.result,null,2))
             this.bannerList=res.data.result
           })
       }
