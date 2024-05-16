@@ -8,6 +8,8 @@
   "dependencies": {
     "@meihui/home": "file:../../feature/Home",
     "@meihui/Category": "file:../../feature/Category",
+    "@meihui/my": "file:../../feature/My",
+    "@meihui/cart": "file:../../feature/ShopCart",
     "@meihui/common": "file:../../common"
   }
 }
