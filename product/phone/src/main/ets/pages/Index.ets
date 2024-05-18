@@ -9,46 +9,53 @@ import { MainPage as Category } from '@meihui/Category'
 import { MainPage as My } from '@meihui/my'
 import { MainPage as Cart } from '@meihui/cart'
 import mediaQuery from '@ohos.mediaquery'
+import {CheckOriginType, LandState} from  '@meihui/common'
 
 
 
 @Entry
 @Component
 struct Index {
-  listenerScreen = mediaQuery.matchMediaSync('(orientation: landscape)')
-  @State isLand:boolean=false
+
  @State index:number=0
 
-aboutToAppear(): void {
-  this.listenerScreen.on('change',(mediaQueryResult)=>{
-    this.isLand=mediaQueryResult.matches
-  })
+@Builder TabsContent(landState:LandState){
+  // 自定义builder 传参的方式适配
+  Tabs({barPosition:landState.isLand?BarPosition.Start:BarPosition.End,index:$$this.index}){
+    TabContent(){
+      Home()
+    }
+
+    .tabBar(this.Tabbuilder($r('app.media.ic_public_home_normal'),$r('app.media.ic_public_home_actived'),'首页',0))
+    TabContent(){
+      Category()
+    }
+    .tabBar(this.Tabbuilder($r('app.media.ic_public_pro_normal'),$r('app.media.ic_public_pro_actived'),'分类',1))
+    TabContent(){
+      Cart()}
+    .tabBar(this.Tabbuilder($r('app.media.ic_public_cart_normal'),$r('app.media.ic_public_cart_actived'),'购物袋',2))
+    TabContent(){
+      My()}
+    .tabBar(this.Tabbuilder($r('app.media.ic_public_my_normal'),$r('app.media.ic_public_my_actived'),'我的',3))
+
+  }
+  //禁止tab滑动
+  .scrollable(false)
+  .vertical(landState.isLand)
+  .barMode(BarMode.Fixed)
 }
 
   build() {
-    // 自定义builder 传参的方式适配
-    Tabs({barPosition:this.isLand?BarPosition.Start:BarPosition.End,index:$$this.index}){
-      TabContent(){
-Home()
-      }
-
-        .tabBar(this.Tabbuilder($r('app.media.ic_public_home_normal'),$r('app.media.ic_public_home_actived'),'首页',0))
-      TabContent(){
-        Category()
-       }
-        .tabBar(this.Tabbuilder($r('app.media.ic_public_pro_normal'),$r('app.media.ic_public_pro_actived'),'分类',1))
-      TabContent(){
-        Cart()}
-        .tabBar(this.Tabbuilder($r('app.media.ic_public_cart_normal'),$r('app.media.ic_public_cart_actived'),'购物袋',2))
-      TabContent(){
-       My()}
-        .tabBar(this.Tabbuilder($r('app.media.ic_public_my_normal'),$r('app.media.ic_public_my_actived'),'我的',3))
-
+    Column(){
+      // 自定义builder 传参的方式适配
+      // 1. 通过媒体查询 检测当前是否是横屏
+      // 2. 根据检测到的结果控制tabs某个属性
+      CheckOriginType({
+        Slot: (landState)=>{
+          this.TabsContent(landState)
+        }
+      })
     }
-    //禁止tab滑动
-    .scrollable(false)
-    .vertical(this.isLand)
-    .barMode(BarMode.Fixed)
   }
   @Builder
   Tabbuilder(img:ResourceStr,selectimg:ResourceStr,text:string,index:number){
