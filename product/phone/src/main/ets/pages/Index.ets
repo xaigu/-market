@@ -8,17 +8,26 @@ import { MainPage as Home } from '@meihui/home'
 import { MainPage as Category } from '@meihui/Category'
 import { MainPage as My } from '@meihui/my'
 import { MainPage as Cart } from '@meihui/cart'
+import mediaQuery from '@ohos.mediaquery'
+
 
 
 @Entry
 @Component
 struct Index {
+  listenerScreen = mediaQuery.matchMediaSync('(orientation: landscape)')
+  @State isLand:boolean=false
  @State index:number=0
 
+aboutToAppear(): void {
+  this.listenerScreen.on('change',(mediaQueryResult)=>{
+    this.isLand=mediaQueryResult.matches
+  })
+}
 
   build() {
     // 自定义builder 传参的方式适配
-    Tabs({barPosition:BarPosition.End,index:$$this.index}){
+    Tabs({barPosition:this.isLand?BarPosition.Start:BarPosition.End,index:$$this.index}){
       TabContent(){
 Home()
       }
@@ -38,6 +47,8 @@ Home()
     }
     //禁止tab滑动
     .scrollable(false)
+    .vertical(this.isLand)
+    .barMode(BarMode.Fixed)
   }
   @Builder
   Tabbuilder(img:ResourceStr,selectimg:ResourceStr,text:string,index:number){

@@ -23,7 +23,7 @@ id:'1181622001',
     Row(){
 Scroll(){
   Row({space:20}){
-    ForEach(this.categoryList,(item:CategoryType)=>{
+    ForEach(this.categoryList,(item:CategoryType,index:number)=>{
       Column(){
         Image(item.picture)
           .width(42)
@@ -33,7 +33,7 @@ Scroll(){
       }
       .width(60)
       .aspectRatio(6 / 8)
-      .backgroundColor(this.bgColorList[0])
+      .backgroundColor(this.bgColorList[index])
       .borderRadius(30)
       .justifyContent(FlexAlign.Center)
     })
