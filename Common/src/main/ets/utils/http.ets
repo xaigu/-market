@@ -1,5 +1,5 @@
 // 基于axios做一些基础封装
-import axios, { InternalAxiosRequestConfig,AxiosError,AxiosResponse} from '@ohos/axios'
+import axios, { InternalAxiosRequestConfig,AxiosError,AxiosResponse, AxiosRequestConfig} from '@ohos/axios'
 // 1. 实例化（baseURL + timeout）
 
 const httpInstance = axios.create({
@@ -35,4 +35,19 @@ httpInstance.interceptors.response.use((response: AxiosResponse) => {
   return Promise.reject(error)
 })
 
-export  { httpInstance }
+// 1. 定义一个接口通用的泛型返回类型
+interface HttpRes<T> {
+  code:string,
+  msg:string,
+  result: T
+}
+
+// 封装fetchData函数
+// 1. 参数  2. 核心逻辑  3.返回值
+function fetchData<T>(reqConfig:AxiosRequestConfig):Promise<AxiosResponse<HttpRes<T>,null>>{
+  // axios实例发送请求
+  // 返回promise
+  return httpInstance.request<null, AxiosResponse<HttpRes<T>,null>,null>(reqConfig)
+}
+
+export  { httpInstance,fetchData }

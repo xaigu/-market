@@ -1,21 +1,27 @@
-import { BannerItem } from '../apis/banner'
+import { getBannerListAPI, BannerItem } from '../apis/banner'
 
 @Component
 export struct HomeBanner {
   private  swiperController:SwiperController=new SwiperController()
-  @State bannerList:BannerItem[]=new Array(4).fill({
-    id: "42",
-    imgUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/banner/nuandong_sj.png",
-    hrefUrl: "/category/1181622006",
-    type: "1"
-  })
+  @State bannerList:BannerItem[]=[]
+  aboutToAppear(): void {
+    this.getbannerList()
+  }
+  getbannerList=async ()=>{
+    try {
+      const res = await getBannerListAPI()
+      this.bannerList = res.data.result
+    } catch (e) {
+      console.log('bannerlist:',e)
+    }
+  }
   build() {
     Column(){
-     Swiper(){
+     Swiper(this.swiperController){
        ForEach(this.bannerList,(item:BannerItem)=>{
          Image(item.imgUrl)
            .width('100%')
-           .aspectRatio(3/2)
+           .aspectRatio(360/240)
        })
      }
       .loop(true)

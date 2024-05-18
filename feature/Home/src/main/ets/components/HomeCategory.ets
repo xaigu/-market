@@ -1,13 +1,10 @@
-import { CategoryType } from '../apis/banner'
+import { categoryAPI, CategoryType } from '../apis/CategoryType'
 
 @Component
 export struct HomeCategory {
 //获取分类
-  categoryList:CategoryType[]=new Array(6).fill({
-id:'1181622001',
-    name:'气质女装',
-    picture:"https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/c1/qznz.png"
-  })
+  @State
+  categoryList:CategoryType[]=[]
   //背景颜色组
   @State bgColorList:string[]=[
     '#faf7f0',
@@ -19,6 +16,17 @@ id:'1181622001',
     '#f9ecf1',
     '#dedfe7',
   ]
+  aboutToAppear(): void {
+    this.getcategory()
+  }
+  getcategory=async ()=>{
+    try {
+      const res = await categoryAPI()
+      this.categoryList = res.data.result
+    } catch (e) {
+      console.log('category:',e)
+    }
+  }
   build() {
     Row(){
 Scroll(){

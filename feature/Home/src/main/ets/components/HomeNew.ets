@@ -1,16 +1,25 @@
-import { NewGoods } from '../apis/banner'
+import { getNewGoodsAPI, NewGoods } from '../apis/NewGoods'
 
 @Component
 export struct HomeNew {
   @State
-  newgoods:NewGoods[]=new Array(8).fill({
-    id: "4034793",
-    name: "跟灯按弦超好玩碳纤维智能尤克里里",
-    desc: "指板亮灯，指引按弦。可视化学习，更高效！还有更多游戏闯关，超有乐趣，不知不觉学会弹琴。",
-    price: "599.00",
-    picture: "https://yanxuan-item.nosdn.127.net/62107ce9769183757d9a425af9f503df.jpg",
-    orderNum: 695
-  })
+  newgoods:NewGoods[]=[]
+  aboutToAppear(): void {
+    this.getNewGoods()
+  }
+ getNewGoods=async ()=>{
+    // 1. 在其他方法中复用该方法
+    // 2. 生命周期钩子函数 只做最基础的最少的初始化的事情 不包含逻辑代码
+    // 3. 参数的二次处理 返回值做二次处理
+    // 为什么要用箭头函数 1. 保证每个实例都有独立的getNewGoods  2. 保证this的指向始终指向的是当前的组件实例对象
+    try {
+      const res=await getNewGoodsAPI()
+      this.newgoods=res.data.result
+    }catch (e){
+      // AlertDialog.show({message:JSON.stringify(e,null,2)})
+      console.log('newgoods:',e)
+    }
+  }
   build() {
 //新鲜好物
     Column(){
