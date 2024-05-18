@@ -15,7 +15,7 @@ export  struct  GridRowList{
   @Prop goodrecommend:recommendList[]
   build() {
     GridRow({
-      columns: 2,
+      columns: { sm:2,md:4 },
       gutter: 8
     }) {
       ForEach(this.goodrecommend, (goods: recommendList) => {
