@@ -3,6 +3,7 @@
     "pages/Index",
     "pages/TextPage",
     "pages/SearchPage",
-    "pages/SearchResult"
+    "pages/SearchResult",
+    "pages/LoginPage"
   ]
 }
