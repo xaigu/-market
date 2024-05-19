@@ -11,6 +11,10 @@
     {
       "name": "EntryAbility_label",
       "value": "label"
+    },
+    {
+      "name": "Mic_reason",
+      "value": "申请录音权限"
     }
   ]
 }

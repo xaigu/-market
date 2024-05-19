@@ -5,3 +5,5 @@ export { LandState,CheckOriginType} from  './src/main/ets/components/CheckOrigin
 export { TitleBar} from  './src/main/ets/components/TitleBar'
 export { LoadingCom} from  './src/main/ets/components/LoadingCom'
 export {MyTabs } from  './src/main/ets/components/MyTabs'
+export { AudioManager} from  './src/main/ets/components/Manage/AudioManager'
+export { SpeechManager} from  './src/main/ets/components/Manage/SpeechManager'
