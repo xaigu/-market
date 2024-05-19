@@ -1,5 +1,5 @@
 // 封装一个检测横竖屏的组件
-import { TitleBar } from '@meihui/common'
+import { LoadingCom, TitleBar } from '@meihui/common'
 import mediaQuery from '@ohos.mediaquery'
 //封装一个检测横竖屏的组件
 interface LandState{
@@ -43,21 +43,30 @@ struct TextPage {
     //     }
     //   })
     // }
-    Column(){
+    //tabbar组件封装
+    // Column(){
+    //
+    //   TitleBar({
+    //     title:'分类',
+    //     onBack:()=>{
+    //       console.log('123')
+    //     }
+    //   })
+    //   TitleBar({
+    //     title:'搜索',
+    //     showBack:false,
+    //     onBack:()=>{
+    //       console.log('456')
+    //     }
+    //   })
+    // }
 
-      TitleBar({
-        title:'分类',
-        onBack:()=>{
-          console.log('123')
-        }
-      })
-      TitleBar({
-        title:'搜索',
-        showBack:false,
-        onBack:()=>{
-          console.log('456')
-        }
-      })
+
+    //loadingcom实现
+    Column(){
+      LoadingCom({showLoading:true}){
+        Text('请问这是干什么的')
+      }
     }
   }
 }
