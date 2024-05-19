@@ -2,6 +2,7 @@ import { Auth, TitleBar } from '@meihui/common/Index'
 import { promptAction, router } from '@kit.ArkUI'
 import { loginAPI,request } from '../apis/login'
 import { Log } from '@abner/log'
+import { ifaa } from '@kit.OnlineAuthenticationKit'
 
 // interface FormState{
 //   account: string,
@@ -14,7 +15,14 @@ struct LoginPage {
   account:'',
   password:''
 }
+  //勾选协议
+  @State isAgree:boolean=false
   login=async ()=>{
+    if(this.isAgree===false){
+      promptAction.showToast({message:'勾选隐私协议'})
+      return
+    }
+
     //判断是否同意协议
     if(this.formState.account===''||this.formState.password===''){
       promptAction.showToast({message:'请输入账号或密码'})
@@ -74,10 +82,12 @@ struct LoginPage {
           })
         // 协议
         Row() {
-          Toggle({ type: ToggleType.Checkbox, isOn: false })
+          Toggle({ type: ToggleType.Checkbox, isOn: this.isAgree })
             .size({ width: 10 })
             .selectedColor('#191919')
-
+            .onChange((value)=>{
+              this.isAgree=value
+            })
           Text('查看并同意《隐私条款》和《用户协议》')
             .fontSize(12)
             .fontColor('#A6A3AD')
