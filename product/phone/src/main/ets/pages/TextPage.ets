@@ -1,4 +1,5 @@
 // 封装一个检测横竖屏的组件
+import { TitleBar } from '@meihui/common'
 import mediaQuery from '@ohos.mediaquery'
 //封装一个检测横竖屏的组件
 interface LandState{
@@ -35,10 +36,26 @@ struct TextPage {
 
   }
   build() {
-    Row(){
-      CheckOriginType({
-        Slot: (landState)=>{
-          this.RenderTabs(landState)
+    // Row(){
+    //   CheckOriginType({
+    //     Slot: (landState)=>{
+    //       this.RenderTabs(landState)
+    //     }
+    //   })
+    // }
+    Column(){
+
+      TitleBar({
+        title:'分类',
+        onBack:()=>{
+          console.log('123')
+        }
+      })
+      TitleBar({
+        title:'搜索',
+        showBack:false,
+        onBack:()=>{
+          console.log('456')
         }
       })
     }
