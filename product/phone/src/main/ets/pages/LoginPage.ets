@@ -1,16 +1,39 @@
-import { TitleBar } from '@meihui/common'
-import { router } from '@kit.ArkUI'
-interface FormState{
-  account: string,
-  password: string
-}
+import { Auth, TitleBar } from '@meihui/common/Index'
+import { promptAction, router } from '@kit.ArkUI'
+import { loginAPI,request } from '../apis/login'
+import { Log } from '@abner/log'
+
+// interface FormState{
+//   account: string,
+//   password: string
+// }
 @Entry
 @Component
 struct LoginPage {
-@State formState:FormState={
+@State formState:request={
   account:'',
   password:''
 }
+  login=async ()=>{
+    //判断是否同意协议
+    if(this.formState.account===''||this.formState.password===''){
+      promptAction.showToast({message:'请输入账号或密码'})
+    }else {
+      try {
+        const res = await loginAPI(this.formState)
+        // Log.info(res.data.result)
+        AlertDialog.show({message:JSON.stringify(res.data.result,null,2)})
+        Auth.setUser(res.data.result)
+        promptAction.showToast({message:'登陆成功'})
+        router.pushUrl({
+          url:'/pages/Index'.slice(1)
+        })
+      } catch (e) {
+        Log.error('fetch login error ',e)
+      }
+    }
+
+  }
 
   build() {
     Column(){
@@ -46,7 +69,9 @@ struct LoginPage {
           .fontSize(14)
           .backgroundColor('#191919')
           .margin({ top: 20 })
-
+          .onClick(()=>{
+            this.login()
+          })
         // 协议
         Row() {
           Toggle({ type: ToggleType.Checkbox, isOn: false })

@@ -1,4 +1,6 @@
 import { router } from '@kit.ArkUI'
+import {USER_KEY,UserType} from  '@meihui/common'
+
 
 interface ListItem {
   name: string
@@ -8,6 +10,8 @@ interface ListItem {
 
 @Component
 export struct MainPage {
+  @StorageLink(USER_KEY)
+  userInfo:UserType={} as UserType
   orderList: ListItem[] = [
     {
       name: '我的订单',
@@ -62,15 +66,15 @@ export struct MainPage {
   UserInfoBuilder() {
     Row() {
       Row() {
-        Image('')
+        Image(this.userInfo.avatar)
           .width(40)
           .aspectRatio(1)
           .borderRadius(20)
 
       }.backgroundColor('#D9D9D9').borderRadius(20)
 
-      if (false) {
-        Text('张三')
+      if (this.userInfo.token) {
+        Text('来自星星的猫')
           .fontSize(18)
           .fontWeight(500)
           .margin({ left: 20 })
