@@ -20,22 +20,29 @@ export struct MainPage {
   }
   build() {
 Column(){
-  Row(){
-    Text('分类')
-      .fontSize(17)
+  Stack(){
+    Row(){
+      Text('分类')
+        .fontSize(17)
+    }
+    .width('100%')
+    .height(56)
+    .justifyContent(FlexAlign.Center)
+    // .backgroundColor(Color.Orange)
     Row(){
       Image($r('app.media.home_search_left'))
-        .width(12)
+        .width(18)
         .aspectRatio(1)
     }
-   // .position({x:340,y:20})
+    // .position({x:340,y:20})
     // .backgroundColor(Color.Blue)
+    .justifyContent(FlexAlign.End)
+    .width('100%')
+    .height(56)
+    .margin({right:20})
 
   }
-  .width('100%')
-  .height(56)
-  .justifyContent(FlexAlign.Center)
-  // .backgroundColor(Color.Orange)
+
   //切换部分
   Row(){
     //左侧tab
@@ -66,7 +73,9 @@ Column(){
             .objectFit(ImageFit.Fill)
             .borderRadius(24)
             .aspectRatio(1)
+            .backgroundColor('#F6F6F6')
         }
+        .justifyContent(FlexAlign.Center)
         .width('100%')
         //小图
         GridRow({columns:2,gutter:4}){
@@ -82,7 +91,7 @@ Column(){
               }
               .width('100%')
               .aspectRatio(1)
-              .backgroundColor('F6F6F6')
+              .backgroundColor('#F6F6F6')
               .borderRadius(16)
               .justifyContent(FlexAlign.Center)
             }

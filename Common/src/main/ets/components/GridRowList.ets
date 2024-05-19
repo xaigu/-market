@@ -8,7 +8,8 @@ export interface recommendList {
   payCount: number;
   picture: string;
   price: string;
-
+  desc?:string
+  orderNum?:number
 }
 @Component
 export  struct  GridRowList{
