@@ -4,3 +4,4 @@ export {  recommendList,GridRowList } from './src/main/ets/components/GridRowLis
 export { LandState,CheckOriginType} from  './src/main/ets/components/CheckOriginTypeCom'
 export { TitleBar} from  './src/main/ets/components/TitleBar'
 export { LoadingCom} from  './src/main/ets/components/LoadingCom'
+export {MyTabs } from  './src/main/ets/components/MyTabs'

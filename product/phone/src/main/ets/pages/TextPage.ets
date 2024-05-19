@@ -1,5 +1,6 @@
 // 封装一个检测横竖屏的组件
-import { LoadingCom, TitleBar } from '@meihui/common'
+import { LoadingCom, MyTabs, TitleBar, } from '@meihui/common'
+import { listItem } from '@meihui/common/src/main/ets/components/MyTabs'
 import mediaQuery from '@ohos.mediaquery'
 //封装一个检测横竖屏的组件
 interface LandState{
@@ -63,10 +64,22 @@ struct TextPage {
 
 
     //loadingcom实现
+    // Column(){
+    //   LoadingCom({showLoading:true}){
+    //     Text('请问这是干什么的')
+    //   }
+    // }
     Column(){
-      LoadingCom({showLoading:true}){
-        Text('请问这是干什么的')
-      }
+      MyTabs({
+        list: [{ title: 'tab1', id: 0 }, { title: 'tab2', id:1 }],
+        activeBgColor: '#000',
+        activeFontColor: '#fff',
+        onchange:(tab)=>{
+          console.log(tab.title)
+        }
+      })
+
     }
+
   }
 }
